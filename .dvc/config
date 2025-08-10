@@ -1,0 +1,4 @@
+[core]
+    remote = localrepo
+['remote "localrepo"']
+    url = ../dvc_storage
