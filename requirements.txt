@@ -4,3 +4,6 @@ pandas
 numpy
 joblib
 mlflow
+prometheus-client
+pydantic
+watchdog
