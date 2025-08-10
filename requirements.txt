@@ -1,7 +1,6 @@
+flask
+scikit-learn
 pandas
 numpy
-scikit-learn
+joblib
 mlflow
-flask
-dvc
-gunicorn
