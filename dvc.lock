@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py
+    deps:
+    - path: src/load_data.py
+      hash: md5
+      md5: 7d29138e73068242c500013b26a00aa8
+      size: 636
+    outs:
+    - path: data/raw/california_housing.csv
+      hash: md5
+      md5: d67831941cf9ff2a8b8babe1bad91eb5
+      size: 1957086

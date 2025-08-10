@@ -1,0 +1,7 @@
+stages:
+  load_data:
+    cmd: python src/load_data.py
+    deps:
+      - src/load_data.py
+    outs:
+      - data/raw/california_housing.csv
