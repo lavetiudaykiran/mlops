@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t your-dockerhub-username/housing-price-prediction:latest .
+        run: docker build -t udaykiran1997/mlops-model:latest .
 
       - name: Push Docker image
-        run: docker push your-dockerhub-username/housing-price-prediction:latest
+        run: docker push udaykiran1997/mlops-model:latest
