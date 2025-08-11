@@ -27,7 +27,6 @@ def train_and_log_models():
     mlflow.set_tracking_uri(f"file:///{tracking_dir.replace(os.sep, '/')}")
 
     X_train, X_test, y_train, y_test = load_data()
-    
     models = {
         "LinearRegression": LinearRegression(),
         "DecisionTree": DecisionTreeRegressor(random_state=42)
