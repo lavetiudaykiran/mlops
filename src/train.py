@@ -10,8 +10,9 @@ import numpy as np
 import joblib
 import os
 
-DATA_PATH = "data/raw/california_housing.csv"
-MODEL_DIR = "models"
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "california_housing.csv")
 
 def load_data(path=DATA_PATH):
     df = pd.read_csv(path)
