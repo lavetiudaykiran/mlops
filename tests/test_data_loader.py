@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pytest
 from sklearn.datasets import fetch_california_housing
-from your_module_file import load_and_save_data  # change to your file name
+from src.load_data import load_and_save_data  # change to your file name
 
 def test_default_path_saves_file(tmp_path, monkeypatch):
     # Monkeypatch project root to tmp_path
