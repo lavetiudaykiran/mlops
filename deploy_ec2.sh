@@ -32,32 +32,32 @@ fi
 
 # Pull the latest image
 echo "📥 Pulling latest image..."
-sudo docker pull abhansi/mlops-assignment-housing-model:latest
+sudo docker pull udaykiran1997/mlops-model:latest
 
 # Stop and remove existing container
 echo "🛑 Stopping existing container (if any)..."
-sudo docker stop mlops-housing-container 2>/dev/null || true
-sudo docker rm mlops-housing-container 2>/dev/null || true
+sudo docker stop mlops-model-container 2>/dev/null || true
+sudo docker rm mlops-model-container 2>/dev/null || true
 
 # Run the new container
 echo "▶️ Starting new container..."
 sudo docker run -d \
-  --name mlops-housing-container \
+  --name mlops-model-container \
   -p 80:5000 \
   --restart unless-stopped \
-  abhansi/mlops-assignment-housing-model:latest
+  udaykiran/mlops-model:latest
 
 # Wait for container to start
 sleep 10
 
 # Check container status
-if sudo docker ps | grep -q mlops-housing-container; then
+if sudo docker ps | grep -q mlops-model-container; then
     echo "✅ Deployment successful!"
     echo "🌐 API is available at: http://$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
     sudo docker ps | grep mlops-housing-container
 else
     echo "❌ Deployment failed. Check logs:"
-    sudo docker logs mlops-housing-container
+    sudo docker logs mlops-model-container
     exit 1
 fi
 EOF

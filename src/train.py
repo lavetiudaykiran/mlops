@@ -1,6 +1,5 @@
 import mlflow
 import mlflow.sklearn
-from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
@@ -14,11 +13,13 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_DIR = os.path.join(PROJECT_ROOT, "model")
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "california_housing.csv")
 
+
 def load_data(path=DATA_PATH):
     df = pd.read_csv(path)
     X = df.drop(columns=["MedHouseVal", "income_cat"])
     y = df["MedHouseVal"]
     return train_test_split(X, y, test_size=0.2, random_state=42)
+
 
 def train_and_log_models():
     # Set tracking URI before any MLflow call
@@ -68,6 +69,7 @@ def train_and_log_models():
             artifact_path="best_model",
             registered_model_name="CaliforniaHousingModel"
         )
+
 
 if __name__ == "__main__":
     train_and_log_models()

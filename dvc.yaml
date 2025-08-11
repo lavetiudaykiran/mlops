@@ -4,4 +4,4 @@ stages:
     deps:
       - src/load_data.py
     outs:
-      - data/raw/california_housing.csv
+      - data/california_housing.csv

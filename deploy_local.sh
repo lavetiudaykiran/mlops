@@ -18,7 +18,7 @@ docker run -d \
   --name mlops-housing-container \
   -p 5000:5000 \
   --restart unless-stopped \
-  abhansi/mlops-assignment-housing-model:latest
+  udaykiran1997/mlops-model:latest
 
 # Wait a moment for container to start
 sleep 5
