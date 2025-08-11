@@ -2,7 +2,10 @@ from sklearn.datasets import fetch_california_housing
 import pandas as pd
 import os
 
-def load_and_save_data(data_path="data/raw/california_housing.csv"):
+def load_and_save_data(data_path=None):
+    if data_path is None:
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # two levels up from src/
+        data_path = os.path.join(project_root, "data", "california_housing.csv")
     data = fetch_california_housing(as_frame=True)
     df = data.frame
 
