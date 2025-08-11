@@ -2,6 +2,10 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']  # This is Prometheus itself
+
   - job_name: 'mlops_api'
     static_configs:
-      - targets: ['localhost:5000']  # Point to your Flask app host:port
+      - targets: ['localhost:5000']  # This is your Flask app

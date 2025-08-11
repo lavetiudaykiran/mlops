@@ -26,13 +26,20 @@ logger = get_logger(__name__)
 app = Flask(__name__)
 
 # Prometheus metrics
+REQUEST_COUNT = Counter('request_count_total', 'Total number of requests', ['method', 'endpoint'])
+REQUEST_LATENCY = Histogram(
+    "http_request_latency_seconds", "HTTP request latency", ["endpoint"]
+)
 PREDICTION_COUNT = Counter("prediction_requests_total", "Total prediction requests")
 PREDICTION_ERRORS = Counter("prediction_errors_total", "Total prediction errors")
 PREDICTION_LATENCY = Histogram("prediction_latency_seconds", "Prediction latency in seconds")
 LAST_RETRAIN_TIME = Gauge("model_last_retrain_timestamp", "Unix timestamp of last model retrain")
 RETRAIN_COUNT = Counter("retrain_requests_total", "Total retrain requests")
 # Increment every time prediction endpoint is called
-REQUEST_COUNT.inc()
+@app.before_request
+def before_request():
+    from flask import request
+    REQUEST_COUNT.labels(method=request.method, endpoint=request.path).inc()
 # Data and model directories relative to project root
 DATA_DIR = os.path.join(project_root, "data")
 MODEL_DIR = os.path.join(project_root, "model")  # singular 'model' as per your note
@@ -251,9 +258,9 @@ def health():
         "timestamp": datetime.now().isoformat()
     })
 
-@app.route("/metrics", methods=["GET"])
+@app.route('/metrics')
 def metrics():
-    return generate_latest(), 200, {"Content-Type": CONTENT_TYPE_LATEST}
+    return generate_latest(), 200, {'Content-Type': CONTENT_TYPE_LATEST}
 
 if __name__ == "__main__":
     logger.info(f"Starting API server...")
